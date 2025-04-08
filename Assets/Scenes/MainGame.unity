@@ -898,7 +898,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1574127437}
         m_TargetAssemblyTypeName: shop, Assembly-CSharp
-        m_MethodName: Buy
+        m_MethodName: OnBuy
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

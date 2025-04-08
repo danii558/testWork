@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class wallet : MonoBehaviour
     [Header("UI")]
     public Text pointText;
 
+    public event Action Buy;
 
     public static wallet singleton;
 
@@ -22,23 +24,22 @@ public class wallet : MonoBehaviour
     {
         _points += ChangeWallet;
         pointText.text = _points.ToString();
+        shop._nowPoints = _points;
+    }
+    public void TakeAwayPoints(int changeWallet)
+    {
+        _points -= changeWallet;
+        pointText.text = _points.ToString();
+        shop._nowPoints = _points;
     }
 
     public void BuyOnShop(int changePoints)
     {
-        if(_points >= changePoints)
-        {
-            _points -= changePoints;
-            pointText.text = _points.ToString();
-            prize();
-        } else
-        {
-            Debug.Log("Error! You dont have a money");
-        }
+        Buy?.Invoke();
     }
 
-    private void prize()
+    public int ReturnPoints()
     {
-        clickButton.singleton.changeClicksCount(1);
+        return _points;
     }
 }
